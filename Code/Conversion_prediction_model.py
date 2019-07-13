@@ -7,16 +7,28 @@ Created on Thu Jul 11 20:29:32 2019
 """
 
 import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import LabelBinarizer
 
-train = pd.read_csv('/Users/mayur/Documents/GitHub/Conversion_modeling'+
-                    '/GA-conversion-modeling/Data/newtrain.csv')
 
-trial_data = train.iloc[:10000,:]
+train = pd.read_csv('/Users/mayur/Documents/GitHub/'+
+                    'newtrain.csv')
+
+trial_data = train.iloc[:10,[0,4,6,8]]
+
+lb = LabelBinarizer()
+
+lb.fit(trial_data)
 
 # checking number of unique visitor ids
 
 unique_visitors = list(trial_data.fullVisitorId.unique())
-uniq
+
+enc_channelGrouping = OneHotEncoder()
+enc_channelGrouping.fit(trial_data['channelGrouping'])
+
+
+"""
 
 dict_channelGrouping = dict(enumerate(trial_data['channelGrouping'].astype(
         'category').cat.categories))
@@ -62,7 +74,7 @@ dict_source = dict(enumerate(
 
 enumerate(trial_data.columns)
 
-
+"""
 
 
 
